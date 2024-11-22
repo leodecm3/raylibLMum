@@ -32,6 +32,7 @@ PLATFORM              ?= PLATFORM_DESKTOP
 PROJECT_NAME          ?= rayliblmum
 PROJECT_VERSION       ?= 1.0
 PROJECT_BUILD_PATH    ?= .
+## GSLeo old --> PROJECT_SOURCE_FILES  ?= rayliblmum.c
 PROJECT_SOURCE_FILES  ?= rayliblmum.cpp
 
 RAYLIB_SRC_PATH       ?= C:\raylib\raylib\src
@@ -104,7 +105,8 @@ endif
 
 # Define default C compiler: CC
 #------------------------------------------------------------------------------------------------
-CC = gcc
+## GSLeo old --> CC = gcc
+CC = g++
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),OSX)
@@ -152,7 +154,9 @@ endif
 #  -Wno-missing-braces  ignore invalid warning (GCC bug 53119)
 #  -Wno-unused-value    ignore unused return values of some functions (i.e. fread())
 #  -D_DEFAULT_SOURCE    use with -std=c99 on Linux and PLATFORM_WEB, required for timespec
-CFLAGS = -Wall -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces -Wno-unused-value -Wno-pointer-sign $(PROJECT_CUSTOM_FLAGS)
+## GSLeo old --> CFLAGS = -Wall -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces -Wno-unused-value -Wno-pointer-sign $(PROJECT_CUSTOM_FLAGS)
+CFLAGS = -Wall -std=c++11 -D_DEFAULT_SOURCE $(PROJECT_CUSTOM_FLAGS)
+
 #CFLAGS += -Wextra -Wmissing-prototypes -Wstrict-prototypes
 
 ifeq ($(BUILD_MODE),DEBUG)
@@ -324,8 +328,12 @@ $(PROJECT_NAME): $(OBJS)
 
 # Compile source files
 # NOTE: This pattern will compile every module defined on $(OBJS)
-%.o: %.c
+
+## GSLeo old -->%.o: %.c
+## GSLeo old -->	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
+%.o: %.cpp
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
+
 
 # Clean everything
 clean:

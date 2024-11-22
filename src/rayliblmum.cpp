@@ -12,9 +12,13 @@
 #include "raylib.h"
 
 
+
 #if defined(PLATFORM_WEB)
     #include <emscripten/emscripten.h>
 #endif
+
+class MyClass{};
+
 
 //----------------------------------------------------------------------------------
 // Local Variables Definition (local to this module)
@@ -39,9 +43,9 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "raylib - project_name");
 
-    camera.position = (Vector3){ 3.0f, 3.0f, 2.0f };
-    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+    camera.position = { 3.0f, 3.0f, 2.0f };
+    camera.target = { 0.0f, 0.0f, 0.0f };
+    camera.up = { 0.0f, 1.0f, 0.0f };
     camera.fovy = 60.0f;
     camera.projection = CAMERA_PERSPECTIVE;
 
