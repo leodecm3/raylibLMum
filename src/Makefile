@@ -237,6 +237,9 @@ ifeq ($(PLATFORM),PLATFORM_WEB)
     # --source-map-base          # allow debugging in browser with source map
     LDFLAGS += -s USE_GLFW=3 -s TOTAL_MEMORY=$(BUILD_WEB_HEAP_SIZE) -s STACK_SIZE=$(BUILD_WEB_STACK_SIZE) -s FORCE_FILESYSTEM=1
     
+    SOURCES = $(wildcard src/*.cpp) $(wildcard src/*.h)
+    OBJECTS = $(SOURCES:.cpp=.o)
+
     # Build using asyncify
     ifeq ($(BUILD_WEB_ASYNCIFY),TRUE)
         LDFLAGS += -s ASYNCIFY -s ASYNCIFY_STACK_SIZE=$(BUILD_WEB_ASYNCIFY_STACK_SIZE)
