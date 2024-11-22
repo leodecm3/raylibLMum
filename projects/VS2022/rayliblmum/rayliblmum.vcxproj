@@ -352,9 +352,11 @@
   <ItemGroup>
     <!--Additional Include Items-->
     <ClInclude Include="..\..\..\src\external\raygui.h" />
+    <ClInclude Include="MyGame.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\rayliblmum.c" />
+    <ClCompile Include="..\..\..\src\rayliblmum.cpp" />
+    <ClCompile Include="MyGame.cpp" />
     <!--Additional Compile Items-->
     <!--<ClCompile Include="..\..\..\src\extra_module.c" />-->
   </ItemGroup>
