@@ -125,6 +125,9 @@ static void UpdateDrawFrame(void)
 
         BeginDrawing();
         ClearBackground(darkBlue);
+
+        DrawTextEx(font, "Leo v1", { 320, 550 }, 38, 2, WHITE);
+
         DrawTextEx(font, "Score", { 365, 15 }, 38, 2, WHITE);
         DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
         if (game.gameOver)
@@ -141,7 +144,7 @@ static void UpdateDrawFrame(void)
         DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, lightBlue);
         game.Draw();
 
-        DrawFPS(9, 10);
+        DrawFPS(10, 10);
 
         EndDrawing();
 }
