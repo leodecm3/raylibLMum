@@ -12,7 +12,6 @@ public:
     void MoveBlockDown();
     bool gameOver;
     int score;
-    Music music;
 
 private:
     void MoveBlockLeft();

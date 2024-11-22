@@ -68,7 +68,7 @@ static void UpdateDrawFrame(void)
     Color lightBlue = { 59, 85, 162, 255 };
     Color darkBlue = { 44, 44, 127, 255 };
 
-    UpdateMusicStream(game->music);
+    //UpdateMusicStream(game->music);
     game->HandleInput();
     if (EventTriggered(0.2))
     {

@@ -11,8 +11,8 @@ Game::Game()
     gameOver = false;
     score = 0;
     InitAudioDevice();
-    music = LoadMusicStream("Sounds/music.mp3");
-    PlayMusicStream(music);
+    //music = LoadMusicStream("Sounds/music.mp3");
+    //PlayMusicStream(music);
     rotateSound = LoadSound("Sounds/rotate.mp3");
     clearSound = LoadSound("Sounds/clear.mp3");
 }
@@ -21,7 +21,6 @@ Game::~Game()
 {
     UnloadSound(rotateSound);
     UnloadSound(clearSound);
-    UnloadMusicStream(music);
     CloseAudioDevice();
 }
 
