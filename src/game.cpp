@@ -1,5 +1,6 @@
 #include "game.h"
 #include <random>
+#include "colors.h"
 
 Game::Game()
 {
