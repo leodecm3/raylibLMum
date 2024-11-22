@@ -43,7 +43,7 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "raylib - project_name");
 
-    camera.position = { 3.0f, 3.0f, 2.0f };
+    camera.position = { 3.1f, 3.0f, 2.0f };
     camera.target = { 0.0f, 0.0f, 0.0f };
     camera.up = { 0.0f, 1.0f, 0.0f };
     camera.fovy = 60.0f;
