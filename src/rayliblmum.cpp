@@ -141,7 +141,7 @@ static void UpdateDrawFrame(void)
         DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, lightBlue);
         game.Draw();
 
-        DrawFPS(10, 10);
+        DrawFPS(9, 10);
 
         EndDrawing();
 }
