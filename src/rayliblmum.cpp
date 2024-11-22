@@ -78,7 +78,7 @@ static void UpdateDrawFrame(void)
     BeginDrawing();
     ClearBackground(darkBlue);
     
-    DrawTextEx(font, "Leo v1", { 320, 550 }, 38, 2, WHITE);
+    DrawTextEx(font, "Leo v2", { 320, 550 }, 38, 2, WHITE);
     
     DrawTextEx(font, "Score", { 365, 15 }, 38, 2, WHITE);
     DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
