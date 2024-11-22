@@ -10,26 +10,41 @@
 ********************************************************************************************/
 
 #include "raylib.h"
-
+#include "game.h"
+#include "colors.h"
+#include <iostream>
 
 
 #if defined(PLATFORM_WEB)
     #include <emscripten/emscripten.h>
 #endif
 
-class MyClass{};
-
 
 //----------------------------------------------------------------------------------
 // Local Variables Definition (local to this module)
 //----------------------------------------------------------------------------------
-Camera camera = { 0 };
-Vector3 cubePosition = { 0 };
+//Camera camera = { 0 };
+//Vector3 cubePosition = { 0 };
 
 //----------------------------------------------------------------------------------
 // Local Functions Declaration
 //----------------------------------------------------------------------------------
 static void UpdateDrawFrame(void);          // Update and draw one frame
+
+Font font;
+Game game;
+
+double lastUpdateTime = 0;
+bool EventTriggered(double interval)
+{
+    double currentTime = GetTime();
+    if (currentTime - lastUpdateTime >= interval)
+    {
+        lastUpdateTime = currentTime;
+        return true;
+    }
+    return false;
+}
 
 //----------------------------------------------------------------------------------
 // Main entry point
@@ -38,16 +53,17 @@ int main()
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    InitWindow(500, 620, "raylib Tetris");
 
-    InitWindow(screenWidth, screenHeight, "raylib - project_name");
+    font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
 
-    camera.position = { 3.1f, 3.0f, 2.0f };
-    camera.target = { 0.0f, 0.0f, 0.0f };
-    camera.up = { 0.0f, 1.0f, 0.0f };
-    camera.fovy = 60.0f;
-    camera.projection = CAMERA_PERSPECTIVE;
+    game = Game();
+
+    //camera.position = { 3.1f, 3.0f, 2.0f };
+    //camera.target = { 0.0f, 0.0f, 0.0f };
+    //camera.up = { 0.0f, 1.0f, 0.0f };
+    //camera.fovy = 60.0f;
+    //camera.projection = CAMERA_PERSPECTIVE;
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 60, 1);
@@ -73,29 +89,59 @@ int main()
 // Update and draw game frame
 static void UpdateDrawFrame(void)
 {
-    // Update
-    //----------------------------------------------------------------------------------
-    UpdateCamera(&camera, CAMERA_ORBITAL);
-    //----------------------------------------------------------------------------------
+//    // Update
+//    //----------------------------------------------------------------------------------
+//    UpdateCamera(&camera, CAMERA_ORBITAL);
+//    //----------------------------------------------------------------------------------
+//
+//    // Draw
+//    //----------------------------------------------------------------------------------
+//    BeginDrawing();
+//
+//        ClearBackground(RAYWHITE);
+//
+//        BeginMode3D(camera);
+//
+//            DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
+//            DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
+//            DrawGrid(10, 1.0f);
+//
+//        EndMode3D();
+//
+//        DrawText("Welcome to raylib basic sample", 10, 40, 20, DARKGRAY);
+//
+//    DrawFPS(10, 10);
+//
+// 
+//   EndDrawing();
+//    //----------------------------------------------------------------------------------
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    BeginDrawing();
+        UpdateMusicStream(game.music);
+        game.HandleInput();
+        if (EventTriggered(0.2))
+        {
+            game.MoveBlockDown();
+        }
 
-        ClearBackground(RAYWHITE);
+        BeginDrawing();
+        ClearBackground(darkBlue);
+        DrawTextEx(font, "Score", { 365, 15 }, 38, 2, WHITE);
+        DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
+        if (game.gameOver)
+        {
+            DrawTextEx(font, "GAME OVER", { 320, 450 }, 38, 2, WHITE);
+        }
+        DrawRectangleRounded({ 320, 55, 170, 60 }, 0.3, 6, lightBlue);
 
-        BeginMode3D(camera);
+        char scoreText[10];
+        sprintf(scoreText, "%d", game.score);
+        Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2);
 
-            DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-            DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-            DrawGrid(10, 1.0f);
-
-        EndMode3D();
-
-        DrawText("Welcome to raylib basic sample", 10, 40, 20, DARKGRAY);
+        DrawTextEx(font, scoreText, { 320 + (170 - textSize.x) / 2, 65 }, 38, 2, WHITE);
+        DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, lightBlue);
+        game.Draw();
 
         DrawFPS(10, 10);
 
-    EndDrawing();
-    //----------------------------------------------------------------------------------
+        EndDrawing();
 }
