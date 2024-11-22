@@ -11,7 +11,7 @@
 
 #include "raylib.h"
 #include "game.h"
-#include "colors.h"
+//#include "colors.h"
 #include <iostream>
 
 #if defined(PLATFORM_WEB)
@@ -64,6 +64,10 @@ int main()
 // Update and draw game frame
 static void UpdateDrawFrame(void)
 { 
+    //this is bad...
+    Color lightBlue = { 59, 85, 162, 255 };
+    Color darkBlue = { 44, 44, 127, 255 };
+
     UpdateMusicStream(game->music);
     game->HandleInput();
     if (EventTriggered(0.2))
